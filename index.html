@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Khushi ❤️ Piyush</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  height:100vh;
+  background:radial-gradient(circle at top,#1b1b3a,#050510);
+  overflow:hidden;
+  font-family:'Poppins',sans-serif;
+  color:white;
+}
+
+/* lock */
+.lock{
+  position:fixed; inset:0;
+  background:#050510;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  z-index:99;
+}
+.lock input{
+  padding:10px 18px;
+  border-radius:20px;
+  border:none;
+  outline:none;
+  text-align:center;
+}
+
+/* stars */
+.star{
+  position:absolute;
+  width:2px;height:2px;
+  background:white;
+  opacity:.8;
+  animation:twinkle 2s infinite alternate;
+}
+@keyframes twinkle{from{opacity:.3;}to{opacity:1;}}
+
+/* glow */
+.glow{
+  position:fixed; inset:0;
+  background:radial-gradient(circle,rgba(255,180,100,.18),rgba(0,0,0,.8));
+  animation:breathe 6s infinite;
+  pointer-events:none;
+}
+@keyframes breathe{50%{opacity:1;}}
+
+/* float */
+.float{position:absolute;animation:float 9s linear infinite;}
+@keyframes float{
+  from{transform:translateY(110vh);opacity:0;}
+  to{transform:translateY(-10vh);opacity:1;}
+}
+
+/* card */
+.card{
+  position:absolute;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  background:rgba(255,255,255,.15);
+  backdrop-filter:blur(18px);
+  padding:36px;
+  width:92%;
+  max-width:680px;
+  border-radius:30px;
+  text-align:center;
+  box-shadow:0 0 60px rgba(255,180,100,.25);
+}
+
+/* text */
+h1{
+  font-family:Pacifico;
+  color:#ffb347;
+  text-shadow:0 0 25px #ffb347;
+}
+.note{
+  line-height:1.9;
+  margin-top:20px;
+  font-size:16.8px;
+  min-height:300px;
+}
+.heartBeat{font-size:30px;animation:beat 1s infinite;}
+@keyframes beat{50%{transform:scale(1.3);}}
+
+/* teddy */
+.teddy{font-size:65px;cursor:pointer;animation:hug 2s infinite;}
+@keyframes hug{50%{transform:scale(1.15);}}
+
+/* buttons */
+button{
+  padding:10px 22px;
+  border:none;
+  border-radius:20px;
+  margin:8px;
+  cursor:pointer;
+}
+.yes{background:#ffb347;}
+.no{background:white;color:#ffb347;}
+
+.hidden{display:none}
+
+/* ring */
+.ring{
+  font-size:70px;
+  animation:pop 1.2s ease;
+}
+@keyframes pop{from{transform:scale(0);}to{transform:scale(1);}}
+
+/* sections */
+.section{
+  margin-top:20px;
+  padding:18px;
+  border-radius:18px;
+  background:rgba(255,180,100,.18);
+  animation:fadeIn 1.5s ease;
+}
+@keyframes fadeIn{
+  from{opacity:0;transform:translateY(20px);}
+  to{opacity:1;transform:translateY(0);}
+}
+
+/* music */
+.music{
+  position:fixed;
+  bottom:15px;
+  right:15px;
+  background:#ffb347;
+  padding:10px;
+  border-radius:50%;
+  cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<!-- LOCK -->
+<div class="lock" id="lock">
+  <h2>Enter our secret 💖</h2>
+  <input id="pass" placeholder="Khushi ❤️ Piyush">
+  <button onclick="unlock()">Unlock</button>
+</div>
+
+<!-- MUSIC -->
+<audio id="bgm" loop>
+  <source src="https://cdn.pixabay.com/audio/2023/03/06/audio_4a1dc87c8a.mp3">
+</audio>
+<div class="music" onclick="toggleMusic()">🎶</div>
+
+<div class="glow"></div>
+
+<script>
+for(let i=0;i<120;i++){
+  let s=document.createElement("div");
+  s.className="star";
+  s.style.left=Math.random()*100+"vw";
+  s.style.top=Math.random()*100+"vh";
+  document.body.appendChild(s);
+}
+
+["❤️","💖","💕","💋","🌸","🌹","🕯️"].forEach(sym=>{
+  for(let i=0;i<10;i++){
+    let f=document.createElement("div");
+    f.className="float";
+    f.innerHTML=sym;
+    f.style.left=Math.random()*100+"vw";
+    f.style.fontSize="22px";
+    f.style.animationDuration=(6+Math.random()*6)+"s";
+    document.body.appendChild(f);
+  }
+});
+</script>
+
+<div class="card">
+  <h1>Happy Valentine’s Night Khushi 🕯️</h1>
+  <div class="heartBeat">❤️</div>
+
+  <div id="text" class="note"></div>
+
+  <div class="teddy" onclick="hug()">🧸</div>
+  <div id="hugText" class="hidden note">
+    This teddy is hugging you tight 🤗  
+    because loving you is my safest feeling 💕
+  </div>
+
+  <div>
+    <button class="yes" onclick="yes()">Be Mine Forever 💖</button>
+    <button class="no" onclick="no()">No 🙈</button>
+  </div>
+
+  <div id="answer" class="hidden note"></div>
+  <div id="ring" class="hidden ring">💍</div>
+
+  <!-- SORRY -->
+  <div id="sorry" class="section hidden">
+    <b>I’m Sorry, From My Heart 🤍</b><br><br>
+    If I ever hurt you with my words, my silence,
+    or my mistakes, I am truly sorry.<br><br>
+    And I’m sorry if this Valentine’s wish came late —
+    my love for you was never late,
+    never unsure, and never less. 🤍
+  </div>
+
+  <!-- PROMISE LIST -->
+  <div id="promises" class="section hidden">
+    <b>My Promises to You 🤞💖</b><br><br>
+    I promise to listen when you speak<br>
+    and understand even when you don’t.<br><br>
+    I promise to respect your heart,<br>
+    your feelings, and your dreams.<br><br>
+    I promise to stand by you on your bad days,<br>
+    and celebrate you on your best ones.<br><br>
+    I promise to choose you —<br>
+    even when things are hard,<br>
+    even when life gets messy.<br><br>
+    And most of all,<br>
+    I promise that my love for you<br>
+    will always be honest, gentle, and forever. 💞
+  </div>
+
+  <!-- FUTURE -->
+  <div id="future" class="section hidden">
+    <b>Our Future 🌷</b><br><br>
+    Quiet mornings & warm nights ☕🌙<br>
+    Holding hands without reason 🤝<br>
+    Being each other’s safe place 🫶<br>
+    Growing, learning, and choosing love — always 💖
+  </div>
+
+  <br><b>Forever yours,<br>Piyush 💞</b>
+</div>
+
+<script>
+const msg=`My beautiful Khushi,
+
+In this soft candlelight,
+I want you to know how deeply I feel for you.
+
+You are not just someone I love —
+you are someone my heart feels safe with.
+You make my world calmer,
+my thoughts warmer,
+and my future brighter.
+
+I may not always be perfect,
+but my love for you is real,
+steady,
+and endlessly yours. 💖`;
+
+let i=0;
+(function type(){
+  if(i<msg.length){
+    text.innerHTML+=msg.charAt(i++);
+    setTimeout(type,36);
+  }
+})();
+
+function hug(){hugText.classList.remove("hidden");}
+
+function yes(){
+  answer.classList.remove("hidden");
+  ring.classList.remove("hidden");
+  sorry.classList.remove("hidden");
+  promises.classList.remove("hidden");
+  future.classList.remove("hidden");
+  answer.innerHTML="I choose you — today, tomorrow, and always 🥹❤️";
+}
+
+function no(){alert("Hehe 😌 My heart already chose you.");}
+
+function unlock(){
+  if(pass.value.trim()!==""){
+    lock.style.display="none";
+    bgm.play();
+  }
+}
+function toggleMusic(){
+  bgm.paused?bgm.play():bgm.pause();
+}
+</script>
+
+</body>
+</html>
